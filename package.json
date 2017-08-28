@@ -1,0 +1,14 @@
+{
+  "name": "cat-bin",
+  "version": "1.0.0",
+  "description": "Tool for cat",
+  "repository": "https://github.com/HsuTing/cat-bin.git",
+  "author": "HsuTing <hsuting0106@gmail.com>",
+  "license": "MIT",
+  "bin": {
+    "cat-prepublish": "./lib/prepublish.js"
+  },
+  "dependencies": {
+    "ignore": "^3.3.4"
+  }
+}
