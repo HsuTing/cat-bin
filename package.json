@@ -9,6 +9,7 @@
     "cat-prepublish": "./lib/prepublish.js"
   },
   "dependencies": {
+    "chalk": "^2.1.0",
     "ignore": "^3.3.4"
   }
 }
