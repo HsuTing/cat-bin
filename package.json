@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "chalk": "^2.1.0",
-    "ignore": "^3.3.4"
+    "columnify": "^1.5.4",
+    "ignore": "^3.3.4",
+    "npm-check": "^5.4.5"
   }
 }
