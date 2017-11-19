@@ -17,8 +17,12 @@
   "dependencies": {
     "chalk": "^2.1.0",
     "columnify": "^1.5.4",
+    "command-line-args": "^4.0.7",
     "ignore": "^3.3.4",
-    "npm-check": "^5.4.5"
+    "koa": "^2.4.1",
+    "koa-body": "^2.5.0",
+    "npm-check": "^5.4.5",
+    "rimraf": "^2.6.2"
   },
   "devDependencies": {
     "eslint": "^4.6.1",
