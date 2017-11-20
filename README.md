@@ -47,6 +47,19 @@
   Watch the files and post the files from `cat-bin server`.
   - `host`, `-h`: Use to set the host of the `server`.
   - `port`, `-p`: Use to set the port of the `server`.
+  - `ignore`, `-i`: Use to ignore files that match specified glob.
+  - Example:
+
+    ```sh
+    cat-bin client
+    ```
+
+- upload
+
+  Send a file to `cat-bin server`.
+  - `file`,`-f`: Use to choose file.
+  - `host`, `-h`: Use to set the host of the `server`.
+  - `port`, `-p`: Use to set the port of the `server`.
   - Example:
 
     ```sh
