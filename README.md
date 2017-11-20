@@ -56,14 +56,14 @@
 
 - upload
 
-  Send a file to `cat-bin server`.
+  Send a file or a folder to `cat-bin server`.
   - `file`,`-f`: Use to choose file.
   - `host`, `-h`: Use to set the host of the `server`.
   - `port`, `-p`: Use to set the port of the `server`.
   - Example:
 
     ```sh
-    cat-bin client
+    cat-bin upload
     ```
 
 - showIP
