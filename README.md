@@ -52,3 +52,12 @@
     ```sh
     cat-bin client
     ```
+
+- showIP
+
+  Show local ip.
+  - Example:
+
+    ```sh
+    cat-bin showIP
+    ```
