@@ -1,4 +1,7 @@
-# Cat-bin
+# Cat-bin [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]
+
+## Getting Started
+Install packages using [yarn](https://yarnpkg.com/) (we assume you have pre-installed [npm](https://www.npmjs.com/) and [node.js](https://nodejs.org/)).
 
 - Install
 
@@ -74,3 +77,11 @@
     ```sh
     cat-bin showIP
     ```
+
+## License
+MIT © [HsuTing](http://hsuting.com)
+
+[npm-image]: https://badge.fury.io/js/cat-bin.svg
+[npm-url]: https://npmjs.org/package/cat-bin
+[travis-image]: https://travis-ci.org/HsuTing/cat-bin.svg?branch=master
+[travis-url]: https://travis-ci.org/HsuTing/cat-bin

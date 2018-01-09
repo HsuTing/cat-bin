@@ -1,0 +1,19 @@
+{
+  "generator-cat": {
+    "promptValues": {
+      "private": false,
+      "website": false,
+      "chooseType": "none",
+      "plugins": [
+        "npm"
+      ]
+    },
+    "plugins": [
+      "npm"
+    ],
+    "alias": {
+      "utils": "utils"
+    },
+    "cat": true
+  }
+}
