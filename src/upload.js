@@ -1,14 +1,14 @@
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const process = require('process');
-const commandLineArgs = require('command-line-args');
+import fs from 'fs';
+import path from 'path';
+import process from 'process';
+import commandLineArgs from 'command-line-args';
 
-const upload = require('./utils/upload');
-const {getFileList} = require('./utils/getFileList');
+import upload from './utils/upload';
+import {getFileList} from './utils/getFileList';
 
-module.exports = argv => {
+export default argv => {
   const {host, port, file} = commandLineArgs([{
     name: 'host',
     alias: 'h',

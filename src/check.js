@@ -1,12 +1,12 @@
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const process = require('process');
-const commandLineArgs = require('command-line-args');
-const npmCheck = require('npm-check');
-const chalk = require('chalk');
-const columnify = require('columnify');
+import fs from 'fs';
+import path from 'path';
+import process from 'process';
+import commandLineArgs from 'command-line-args';
+import npmCheck from 'npm-check';
+import chalk from 'chalk';
+import columnify from 'columnify';
 
 const root = process.cwd();
 const babelPath = path.resolve(root, './.babelrc');
@@ -18,7 +18,7 @@ if(fs.existsSync(babelPath)) {
   alias = plugins.slice(-1)[0][1].alias || {};
 }
 
-module.exports = argv => {
+export default argv => {
   if(!fs.existsSync(path.resolve(root, 'package.json')))
     return;
 

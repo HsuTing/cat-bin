@@ -1,14 +1,14 @@
 'use strict';
 
-const process = require('process');
-const commandLineArgs = require('command-line-args');
-const watch = require('node-watch');
-const ignore = require('ignore');
+import process from 'process';
+import commandLineArgs from 'command-line-args';
+import watch from 'node-watch';
+import ignore from 'ignore';
 
-const {getFileListWithFilter, getIngoreRules} = require('./utils/getFileList');
-const upload = require('./utils/upload');
+import {getFileListWithFilter, getIngoreRules} from './utils/getFileList';
+import upload from './utils/upload';
 
-module.exports = argv => {
+export default argv => {
   const {host, port, ignore: addIgnore} = commandLineArgs([{
     name: 'host',
     alias: 'h',

@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 'use strict';
 
-const path = require('path');
-const process = require('process');
+import path from 'path';
+import process from 'process';
 
 if(process.argv[2]) {
   require(path.resolve(__dirname, process.argv[2]))(

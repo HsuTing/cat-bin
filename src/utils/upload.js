@@ -1,9 +1,9 @@
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const process = require('process');
-const FormData = require('form-data');
+import fs from 'fs';
+import path from 'path';
+import process from 'process';
+import FormData from 'form-data';
 
 const upload = (host, port, filesData) => {
   const form = new FormData();

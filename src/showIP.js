@@ -1,7 +1,7 @@
 'use strict';
 
-const ip = require('ip');
+import ip from 'ip';
 
-module.exports = () => {
+export default () => {
   console.log(ip.address());
 };

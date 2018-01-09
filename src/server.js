@@ -1,20 +1,20 @@
 'use strict';
 
-const nodeFs = require('fs');
-const path = require('path');
-const process = require('process');
-const commandLineArgs = require('command-line-args');
-const chalk = require('chalk');
-const Koa = require('koa');
-const body = require('koa-body');
-const memFs = require('mem-fs');
-const editor = require('mem-fs-editor');
-const rimraf = require('rimraf');
-const ip = require('ip');
+import nodeFs from 'fs';
+import path from 'path';
+import process from 'process';
+import commandLineArgs from 'command-line-args';
+import chalk from 'chalk';
+import Koa from 'koa';
+import body from 'koa-body';
+import memFs from 'mem-fs';
+import editor from 'mem-fs-editor';
+import rimraf from 'rimraf';
+import ip from 'ip';
 
 const app = new Koa();
 
-module.exports = argv => {
+export default argv => {
   const {port, folder} = commandLineArgs([{
     name: 'port',
     alias: 'p',

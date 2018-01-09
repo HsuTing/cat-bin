@@ -6,5 +6,4 @@ yarn.lock
 .yo-rc.json
 .travis.yml
 __tests__
-jest.config.js
 coverage

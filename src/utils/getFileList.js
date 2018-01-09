@@ -1,8 +1,8 @@
 'use strict';
 
-const fs = require('fs');
-const path = require('path');
-const ignore = require('ignore');
+import fs from 'fs';
+import path from 'path';
+import ignore from 'ignore';
 
 const getFileList = root => fs.readdirSync(root)
   .reduce((result, file) => {

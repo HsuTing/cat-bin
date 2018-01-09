@@ -1,10 +1,10 @@
 'use strict';
 
-const path = require('path');
-const process = require('process');
-const chalk = require('chalk');
+import path from 'path';
+import process from 'process';
+import chalk from 'chalk';
 
-const {getFileListWithFilter} = require('./utils/getFileList');
+import {getFileListWithFilter} from './utils/getFileList';
 
 const root = process.cwd();
 
