@@ -4,7 +4,7 @@
 import path from 'path';
 import chalk from 'chalk';
 
-import {getFileListWithFilter} from './utils/getFileList';
+import {getFileListWithFilter} from 'utils/getFileList';
 
 const root: string = process.cwd();
 

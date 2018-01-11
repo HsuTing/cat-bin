@@ -21,13 +21,35 @@ export const getFileList: Function = (
   return result;
 }, []);
 
+export const defaultIgnore: Array<string> = [
+  '.*.swp',
+  '._*',
+  '.DS_Store',
+  '.git',
+  '.hg',
+  '.npmrc',
+  '.lock-wscript',
+  '.svn',
+  '.wafpickle-*',
+  'config.gypi',
+  'CVS',
+  'npm-debug.log',
+  'node_modules',
+  '.gitignore',
+  '.npmignore',
+  '!package.json',
+  '!README',
+  '!CHANGELOG',
+  '!LICENSE',
+  '!LICENCE'
+];
 export const getIngoreRules: Function = (
-  ignoreFileName: string,
+  ignoreFilePath: string,
   addIgnore: Array<string> = []
 ): Array<string> => {
-  const ignorePath: string = path.resolve(process.cwd(), ignoreFileName);
+  const ignorePath: string = path.resolve(process.cwd(), ignoreFilePath);
   const ignoreRules: Array<string> = (
-    fs.existsSync(ignorePath) ? (
+    fs.existsSync(ignorePath) && fs.lstatSync(ignorePath).isFile() ? (
       fs.readFileSync(ignorePath, 'utf-8')
         .split(/\n/g)
         .filter(string => string !== '')
@@ -37,33 +59,14 @@ export const getIngoreRules: Function = (
   return [
     ...ignoreRules,
     ...addIgnore,
-    '.*.swp',
-    '._*',
-    '.DS_Store',
-    '.git',
-    '.hg',
-    '.npmrc',
-    '.lock-wscript',
-    '.svn',
-    '.wafpickle-*',
-    'config.gypi',
-    'CVS',
-    'npm-debug.log',
-    'node_modules',
-    '.gitignore',
-    '.npmignore',
-    '!package.json',
-    '!README',
-    '!CHANGELOG',
-    '!LICENSE',
-    '!LICENCE'
+    ...defaultIgnore
   ].map(rule => `**/${rule}`);
 };
 
 export const getFileListWithFilter: Function = (
   ignoreFileName: string,
   addIgnore: Array<string>
-): ignore => ignore().add(
+) => ignore().add(
   getIngoreRules(ignoreFileName, addIgnore)
 ).filter(
   getFileList(process.cwd())

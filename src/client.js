@@ -5,12 +5,12 @@ import commandLineArgs from 'command-line-args';
 import watch from 'node-watch';
 import ignore from 'ignore';
 
-import {getFileListWithFilter, getIngoreRules} from './utils/getFileList';
-import upload from './utils/upload';
+import {getFileListWithFilter, getIngoreRules} from 'utils/getFileList';
+import upload from 'utils/upload';
 
-export default (
+export default async (
   argv: Array<string>
-): void => {
+) => {
   const {
     host,
     port,
@@ -39,14 +39,15 @@ export default (
     argv
   });
 
-  const ig: ignore = ignore().add(getIngoreRules('.gitignore', addIgnore));
+  const ig = ignore().add(getIngoreRules('.gitignore', addIgnore));
   const files: Array<string> = getFileListWithFilter('.gitignore', addIgnore);
 
-  upload(host, port, files);
-  watch(process.cwd(), {
+  await upload(host, port, files);
+
+  return watch(process.cwd(), {
     recursive: true,
-    filter: name => ig.filter(name).length !== 0
-  }, (
+    filter: /* istanbul ignore next */ name => ig.filter(name).length !== 0
+  }, /* istanbul ignore next */ (
     evt: string,
     name: string
   ): void => {

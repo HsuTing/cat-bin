@@ -5,5 +5,8 @@ yarn.lock
 .eslint*
 .yo-rc.json
 .travis.yml
+.flowconfig
 __tests__
+jest.config.js
 coverage
+project

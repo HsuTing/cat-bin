@@ -6,4 +6,5 @@ script:
   - yarn flow
   - yarn build
   - yarn prod
+  - yarn jest
 yarn: true

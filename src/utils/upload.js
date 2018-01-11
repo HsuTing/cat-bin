@@ -1,39 +1,50 @@
+// @flow
 'use strict';
 
 import fs from 'fs';
 import path from 'path';
-import process from 'process';
 import FormData from 'form-data';
 
-const upload = (host, port, filesData) => {
-  const form = new FormData();
-  const filePathArray = [];
-  const files = filesData.filter(file => fs.lstatSync(file).isFile());
+type fileType = Array<string>;
+
+const upload: Function = (
+  host: string,
+  port: number,
+  filesData: fileType
+): Promise<{}> => new Promise((resolve, reject) => {
+  const files: fileType = filesData.filter(file => fs.lstatSync(file).isFile());
 
   if(files.length === 0)
-    return;
+    return resolve({});
 
-  const uploadFiles = files.splice(0, 1);
+  const form = new FormData();
+  const file = files[0];
 
-  uploadFiles.forEach(file => {
-    const filePath = file.replace(process.cwd(), '.');
+  form.append('upload', fs.createReadStream(file));
+  form.append('filePaths', JSON.stringify([
+    path.dirname(file).replace(process.cwd(), '.')
+  ]));
+  console.log(`upload ${file.replace(process.cwd(), '.')}`);
 
-    form.append('upload', fs.createReadStream(file));
-    filePathArray.push(path.dirname(file).replace(process.cwd(), '.'));
-    console.log('upload %s', filePath);
-  });
-  form.append('filePaths', JSON.stringify(filePathArray));
   form.submit({
     host,
     path: '/',
     port
-  }, (err, res) => {
+  }, (
+    err: ?string,
+    res: {
+      resume: Function
+    }
+  ): void => {
+    /* istanbul ignore if */
     if(err)
-      throw new Error(err);
+      return reject(err);
 
     res.resume();
-    upload(host, port, files);
+    upload(host, port, files.splice(1))
+      .then(() => resolve(res))
+      .catch(/* istanbul ignore next */ err => reject(err));
   });
-};
+});
 
 export default upload;

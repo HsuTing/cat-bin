@@ -5,12 +5,12 @@ import fs from 'fs';
 import path from 'path';
 import commandLineArgs from 'command-line-args';
 
-import upload from './utils/upload';
-import {getFileList} from './utils/getFileList';
+import upload from 'utils/upload';
+import {getFileList} from 'utils/getFileList';
 
-export default (
+export default async (
   argv: Array<string>
-): void => {
+): Promise<void> => {
   const {
     host,
     port,
@@ -40,7 +40,7 @@ export default (
 
   const filePath: string = path.resolve(process.cwd(), file);
 
-  upload(host, port, (
+  await upload(host, port, (
     fs.lstatSync(filePath).isDirectory() ?
       getFileList(filePath) :
       [filePath]

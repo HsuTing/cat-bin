@@ -25,7 +25,7 @@ const app: Koa = new Koa();
 
 export default (
   argv: Array<string>
-): void => {
+) => {
   const {
     port,
     folder
@@ -48,11 +48,12 @@ export default (
 
   const root: string = path.resolve(process.cwd(), folder);
 
+  /* istanbul ignore next */
   if(nodeFs.existsSync(root)) {
     rimraf(root, (): void => {
       nodeFs.mkdirSync(root);
     });
-  } else
+  } /* istanbul ignore next */ else
     nodeFs.mkdirSync(root);
 
   app.use(body({multipart: true}));
@@ -85,9 +86,9 @@ export default (
     }: {
       filePaths: string
     } = fields;
-    const filePaths: Array<string> = JSON.parse(filePathsString);
+    const filePaths: Array<string> = JSON.parse(filePathsString || '[]');
 
-    if(!files) {
+    if(!files || !files.upload) {
       ctx.status = 204;
       return next();
     }
@@ -112,20 +113,18 @@ export default (
       fs.commit((
         err: ?string
       ): void => {
+        /* istanbul ignore if */
         if(err)
           return console.log(err);
 
-        console.log(
-          'upload %s',
-          filePath.replace(root, '.')
-        );
+        console.log(`upload ${filePath.replace(root, '.')}`);
       });
     });
 
     return next();
   });
 
-  app.listen(port, () => {
+  return app.listen(port, () => {
     console.log(chalk.green(`[cat-bin server] open server at ${ip.address()}:${port}`));
   });
 };
