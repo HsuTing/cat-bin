@@ -1,24 +1,32 @@
+// @flow
 'use strict';
 
 import fs from 'fs';
 import path from 'path';
 import ignore from 'ignore';
 
-const getFileList = root => fs.readdirSync(root)
-  .reduce((result, file) => {
-    const childFilePath = path.resolve(root, file);
+export const getFileList: Function = (
+  root: string
+): Array<string> => fs.readdirSync(root).reduce((
+  result: Array<string>,
+  file: string
+): Array<string> => {
+  const childFilePath: string = path.resolve(root, file);
 
-    if(fs.lstatSync(childFilePath).isDirectory())
-      return result.concat(getFileList(childFilePath));
-    else
-      result.push(childFilePath);
+  if(fs.lstatSync(childFilePath).isDirectory())
+    return result.concat(getFileList(childFilePath));
+  else
+    result.push(childFilePath);
 
-    return result;
-  }, []);
+  return result;
+}, []);
 
-const getIngoreRules = (ignoreFileName, addIgnore = []) => {
-  const ignorePath = path.resolve(process.cwd(), ignoreFileName);
-  const ignoreRules = (
+export const getIngoreRules: Function = (
+  ignoreFileName: string,
+  addIgnore: Array<string> = []
+): Array<string> => {
+  const ignorePath: string = path.resolve(process.cwd(), ignoreFileName);
+  const ignoreRules: Array<string> = (
     fs.existsSync(ignorePath) ? (
       fs.readFileSync(ignorePath, 'utf-8')
         .split(/\n/g)
@@ -52,9 +60,10 @@ const getIngoreRules = (ignoreFileName, addIgnore = []) => {
   ].map(rule => `**/${rule}`);
 };
 
-exports.getIngoreRules = getIngoreRules;
-exports.getFileList = getFileList;
-exports.getFileListWithFilter = (ignoreFileName, addIgnore) => ignore().add(
+export const getFileListWithFilter: Function = (
+  ignoreFileName: string,
+  addIgnore: Array<string>
+): ignore => ignore().add(
   getIngoreRules(ignoreFileName, addIgnore)
 ).filter(
   getFileList(process.cwd())

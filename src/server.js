@@ -1,8 +1,8 @@
+// @flow
 'use strict';
 
 import nodeFs from 'fs';
 import path from 'path';
-import process from 'process';
 import commandLineArgs from 'command-line-args';
 import chalk from 'chalk';
 import Koa from 'koa';
@@ -12,10 +12,27 @@ import editor from 'mem-fs-editor';
 import rimraf from 'rimraf';
 import ip from 'ip';
 
-const app = new Koa();
+type fileType = {
+  name: string,
+  path: string
+};
 
-export default argv => {
-  const {port, folder} = commandLineArgs([{
+type fileFieldType = {
+  upload: Array<fileType> | fileType
+};
+
+const app: Koa = new Koa();
+
+export default (
+  argv: Array<string>
+): void => {
+  const {
+    port,
+    folder
+  }: {
+    port: number,
+    folder: string
+  } = commandLineArgs([{
     name: 'port',
     alias: 'p',
     type: Number,
@@ -29,20 +46,46 @@ export default argv => {
     argv
   });
 
-  const root = path.resolve(process.cwd(), folder);
+  const root: string = path.resolve(process.cwd(), folder);
 
   if(nodeFs.existsSync(root)) {
-    rimraf(root, () => {
+    rimraf(root, (): void => {
       nodeFs.mkdirSync(root);
     });
   } else
     nodeFs.mkdirSync(root);
 
   app.use(body({multipart: true}));
-  app.use((ctx, next) => {
-    const {files, fields} = ctx.request.body;
-    const {filePaths: filePathsString} = fields;
-    const filePaths = JSON.parse(filePathsString);
+  app.use((
+    ctx: {
+      status: number,
+      body: Array<string>,
+      request: {
+        body: {
+          files: fileFieldType,
+          fields: {
+            filePaths: string
+          }
+        }
+      }
+    },
+    next: Function
+  ) => {
+    const {
+      files,
+      fields
+    }: {
+      files: fileFieldType,
+      fields: {
+        filePaths: string
+      }
+    } = ctx.request.body;
+    const {
+      filePaths: filePathsString
+    }: {
+      filePaths: string
+    } = fields;
+    const filePaths: Array<string> = JSON.parse(filePathsString);
 
     if(!files) {
       ctx.status = 204;
@@ -50,20 +93,25 @@ export default argv => {
     }
 
     ctx.body = [];
-    const data = (
+    const data: Array<fileType> = (
       files.upload instanceof Array ?
         files.upload :
         [files.upload]
     );
 
-    data.forEach((file, fileIndex) => {
-      const fileFolder = path.resolve(root, filePaths[fileIndex]);
+    data.forEach((
+      file: fileType,
+      fileIndex: number
+    ): void => {
+      const fileFolder: string = path.resolve(root, filePaths[fileIndex]);
       const store = memFs.create();
       const fs = editor.create(store);
-      const filePath = path.resolve(fileFolder, file.name);
+      const filePath: string = path.resolve(fileFolder, file.name);
 
       fs.copy(file.path, filePath);
-      fs.commit(err => {
+      fs.commit((
+        err: ?string
+      ): void => {
         if(err)
           return console.log(err);
 

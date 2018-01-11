@@ -1,28 +1,40 @@
+// @flow
 'use strict';
 
 import fs from 'fs';
 import path from 'path';
-import process from 'process';
 import commandLineArgs from 'command-line-args';
 import npmCheck from 'npm-check';
 import chalk from 'chalk';
 import columnify from 'columnify';
 
-const root = process.cwd();
-const babelPath = path.resolve(root, './.babelrc');
-let alias = {};
+const root: string = process.cwd();
+const babelPath: string = path.resolve(root, './.babelrc');
+let alias: {
+  [string]: string
+} = {};
 
 if(fs.existsSync(babelPath)) {
-  const {plugins} = JSON.parse(fs.readFileSync(babelPath));
+  const {
+    plugins
+  }: {
+    plugins: Array<Array<{alias?: {[string]: string}}>>
+  } = JSON.parse(fs.readFileSync(babelPath, {encoding: 'utf-8'}));
 
   alias = plugins.slice(-1)[0][1].alias || {};
 }
 
-export default argv => {
+export default (
+  argv: Array<string>
+): void => {
   if(!fs.existsSync(path.resolve(root, 'package.json')))
     return;
 
-  const {ignore} = commandLineArgs([{
+  const {
+    ignore
+  }: {
+    ignore: Array<string>
+  } = commandLineArgs([{
     name: 'ignore',
     alias: 'i',
     type: String,
@@ -37,15 +49,44 @@ export default argv => {
       ...ignore,
       ...Object.keys(alias)
     ]
-  }).then(currentState => {
-    const output = currentState.get('packages')
-      .reduce((result, pkg) => {
-        const bumpInstalled = pkg.bump ? pkg.installed : '';
-        const installed = pkg.mismatch ? pkg.packageJson : bumpInstalled;
-        const name = chalk.yellow(pkg.moduleName);
-        const homepage = pkg.homepage ? chalk.blue.underline(pkg.homepage) : '';
+  }).then((
+    currentState
+  ): void => {
+    type rowType = {
+      col_1: Array<string>,
+      col_2: Array<string>,
+      col_3: Array<string>
+    };
+    type dataType = {
+      new: Array<rowType>,
+      update: Array<rowType>,
+      unused: Array<rowType>,
+      notInPkg: Array<rowType>,
+      missing: Array<rowType>
+    };
 
-        let status = 'normal';
+    const output: dataType = currentState.get('packages')
+      .reduce((
+        result: dataType,
+        pkg: {
+          installed: string,
+          bump: string,
+          mismatch: string,
+          packageJson: string,
+          moduleName: string,
+          homepage: string,
+          notInstalled: boolean,
+          notInPackageJson: boolean,
+          easyUpgrade: boolean,
+          pkgError: string,
+          latest: string
+        }
+      ): dataType => {
+        const bumpInstalled: string = pkg.bump ? pkg.installed : '';
+        const installed: string = pkg.mismatch ? pkg.packageJson : bumpInstalled;
+        const name: string = chalk.yellow(pkg.moduleName);
+        const homepage: string = pkg.homepage ? chalk.blue.underline(pkg.homepage) : '';
+        let status: string = 'normal';
 
         if(pkg.notInstalled)
           status = 'missing';
@@ -87,7 +128,9 @@ export default argv => {
         missing: []
       });
 
-    Object.keys(output).forEach(status => {
+    Object.keys(output).forEach((
+      status: string
+    ): void => {
       if(output[status].length === 0)
         return;
 

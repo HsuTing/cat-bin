@@ -1,7 +1,8 @@
+// @flow
 'use strict';
 
 import ip from 'ip';
 
-export default () => {
+export default (): void => {
   console.log(ip.address());
 };

@@ -36,4 +36,4 @@ const upload = (host, port, filesData) => {
   });
 };
 
-module.exports = upload;
+export default upload;

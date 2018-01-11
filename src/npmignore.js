@@ -1,16 +1,23 @@
+// @flow
 'use strict';
 
 import path from 'path';
-import process from 'process';
 import chalk from 'chalk';
 
 import {getFileListWithFilter} from './utils/getFileList';
 
-const root = process.cwd();
+const root: string = process.cwd();
 
-const files = getFileListWithFilter('.npmignore')
-  .reduce((result, filePath) => {
-    const newPath = (
+type filesType = {
+  [string]: Array<string>
+};
+
+const files: filesType = getFileListWithFilter('.npmignore')
+  .reduce((
+    result: filesType,
+    filePath: string
+  ) => {
+    const newPath: string = (
       path.extname(filePath) !== '' ?
         `${path.dirname(filePath)}/*${path.extname(filePath)}` :
         filePath
@@ -24,9 +31,11 @@ const files = getFileListWithFilter('.npmignore')
     return result;
   }, {});
 
-module.exports = () => {
+export default (): void => {
   Object.keys(files)
-    .forEach(key => {
+    .forEach((
+      key: string
+    ): void => {
       if(files[key].length === 1)
         console.log(files[key][0].replace(root, '.'));
       else

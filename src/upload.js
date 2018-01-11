@@ -1,15 +1,25 @@
+// @flow
 'use strict';
 
 import fs from 'fs';
 import path from 'path';
-import process from 'process';
 import commandLineArgs from 'command-line-args';
 
 import upload from './utils/upload';
 import {getFileList} from './utils/getFileList';
 
-export default argv => {
-  const {host, port, file} = commandLineArgs([{
+export default (
+  argv: Array<string>
+): void => {
+  const {
+    host,
+    port,
+    file
+  }: {
+    host: string,
+    port: number,
+    file: string
+  } = commandLineArgs([{
     name: 'host',
     alias: 'h',
     type: String,
@@ -28,7 +38,7 @@ export default argv => {
     argv
   });
 
-  const filePath = path.resolve(process.cwd(), file);
+  const filePath: string = path.resolve(process.cwd(), file);
 
   upload(host, port, (
     fs.lstatSync(filePath).isDirectory() ?

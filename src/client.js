@@ -1,6 +1,6 @@
+// @flow
 'use strict';
 
-import process from 'process';
 import commandLineArgs from 'command-line-args';
 import watch from 'node-watch';
 import ignore from 'ignore';
@@ -8,8 +8,18 @@ import ignore from 'ignore';
 import {getFileListWithFilter, getIngoreRules} from './utils/getFileList';
 import upload from './utils/upload';
 
-export default argv => {
-  const {host, port, ignore: addIgnore} = commandLineArgs([{
+export default (
+  argv: Array<string>
+): void => {
+  const {
+    host,
+    port,
+    ignore: addIgnore
+  }: {
+    host: string,
+    port: number,
+    ignore: Array<string>
+  } = commandLineArgs([{
     name: 'host',
     alias: 'h',
     type: String,
@@ -29,14 +39,17 @@ export default argv => {
     argv
   });
 
-  const ig = ignore().add(getIngoreRules('.gitignore', addIgnore));
-  const files = getFileListWithFilter('.gitignore', addIgnore);
+  const ig: ignore = ignore().add(getIngoreRules('.gitignore', addIgnore));
+  const files: Array<string> = getFileListWithFilter('.gitignore', addIgnore);
 
   upload(host, port, files);
   watch(process.cwd(), {
     recursive: true,
     filter: name => ig.filter(name).length !== 0
-  }, (evt, name) => {
+  }, (
+    evt: string,
+    name: string
+  ): void => {
     if(evt === 'update')
       upload(host, port, [name]);
   });
