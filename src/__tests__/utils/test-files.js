@@ -12,7 +12,7 @@ export const testFiles = [
 
 export const testIgnore = [
   '.*',
-  'README.md',
+  '*.md',
   'LICENSE',
   'jest.config.js',
   'package.json',
