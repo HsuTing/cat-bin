@@ -4,7 +4,7 @@ const fs = require('fs');
 
 // set alias
 const {plugins} = JSON.parse(fs.readFileSync('./.babelrc'));
-const alias = plugins.slice(-1)[0][1].alias;
+const alias = plugins[0][1].alias;
 
 module.exports = {
   globals: {

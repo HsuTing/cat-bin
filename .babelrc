@@ -5,10 +5,10 @@
     "flow"
   ],
   "plugins": [
-    "transform-object-assign",
-    "transform-class-properties",
     ["module-resolver", {
       "root": ["./src"]
-    }]
+    }],
+    "transform-object-assign",
+    "transform-class-properties"
   ]
 }
