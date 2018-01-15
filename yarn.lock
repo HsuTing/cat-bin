@@ -1758,9 +1758,9 @@ escodegen@^1.9.0:
   optionalDependencies:
     source-map "~0.5.6"
 
-"eslint-config-cat@https://github.com/HsuTing/eslint-config-cat.git":
-  version "1.0.1"
-  resolved "https://github.com/HsuTing/eslint-config-cat.git#785673b3e12805676a54af1f2c58741b2b15ccc1"
+eslint-config-cat@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-cat/-/eslint-config-cat-0.1.0.tgz#5a429908b968a736ebf247c29bd3e8376c0d8cbf"
 
 eslint-config-google@^0.9.1:
   version "0.9.1"

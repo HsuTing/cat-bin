@@ -19,17 +19,17 @@
     "email": "hsuting0106@gmail.com",
     "url": "http://hsuting.com"
   },
-  "main": "./lib/index.js",
+  "main": "./lib/bin/index.js",
   "keywords": [
     "cat-bin"
   ],
   "pre-commit": [
     "lint"
   ],
-  "homepage": "https://github.com/undefined/undefined/",
+  "homepage": "https://github.com/HsuTing/cat-bin/",
   "repository": "https://github.com/HsuTing/cat-bin.git",
   "bugs": {
-    "url": "https://github.com/undefined/undefined/issues/"
+    "url": "https://github.com/HsuTing/cat-bin/issues/"
   },
   "license": "MIT",
   "bin": {
@@ -64,7 +64,7 @@
     "concurrently": "^3.5.1",
     "cross-env": "^5.1.3",
     "eslint": "^4.15.0",
-    "eslint-config-cat": "https://github.com/HsuTing/eslint-config-cat.git",
+    "eslint-config-cat": "^0.1.0",
     "eslint-config-google": "^0.9.1",
     "eslint-import-resolver-babel-module": "^4.0.0",
     "eslint-plugin-flowtype": "^2.41.0",
