@@ -18,7 +18,7 @@ Install packages using [yarn](https://yarnpkg.com/) (we assume you have pre-inst
 ## Arguments
 - check
 
-  Check npm package with `npm-check` and `alias` in `.babelrc`.
+  Check npm package with `npm-check`.
   - `ignore`, `-i`: Use to ignore dependencies that match specified glob.
   - Example:
 

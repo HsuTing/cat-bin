@@ -22,21 +22,6 @@ type dataType = {
 };
 
 const root: string = process.cwd();
-const babelPath: string = path.resolve(root, './.babelrc');
-let alias: {
-  [string]: string
-} = {};
-
-/* istanbul ignore else */
-if(fs.existsSync(babelPath)) {
-  const {
-    plugins
-  }: {
-    plugins: Array<Array<{alias?: {[string]: string}}>>
-  } = JSON.parse(fs.readFileSync(babelPath, {encoding: 'utf-8'}));
-
-  alias = plugins.slice(-1)[0][1].alias || {};
-}
 
 export default async (
   argv: Array<string>
@@ -62,10 +47,7 @@ export default async (
   const currentState: {
     get: Function
   } = await npmCheck({
-    ignore: [
-      ...ignore,
-      ...Object.keys(alias)
-    ]
+    ignore
   });
 
   const output: dataType = currentState.get('packages')
