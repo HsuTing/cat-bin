@@ -16,14 +16,26 @@ Install packages using [yarn](https://yarnpkg.com/) (we assume you have pre-inst
   ```
 
 ## Arguments
-- check
+- check-package
 
   Check npm package with `npm-check`.
   - `ignore`, `-i`: Use to ignore dependencies that match specified glob.
   - Example:
 
     ```sh
-    cat-bin check -i bundler-loader?*
+    cat-bin check-package -i bundler-loader?*
+    ```
+
+- check-branch
+
+  Check if branch is merged.
+  Owing to `rebase`, `git branch --merged` is not always work.
+  As a result, use this command to check merged branch.
+  - `token`, `-t`: Add personal access token.
+  - Example:
+
+    ```sh
+    cat-bin check-branch -t <token>
     ```
 
 - npmignore

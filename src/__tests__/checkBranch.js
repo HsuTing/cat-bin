@@ -12,7 +12,6 @@ test('check branch', async () => {
     (gitConfig.sync().alias || {}).token || process.env.github_token
   ])).toMatchObject({
     master: {
-      local: true,
       remote: true,
       states: 'not merged'
     }
