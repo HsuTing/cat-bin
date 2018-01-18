@@ -55,6 +55,7 @@ const getLocalBranchs: Promise<Array<string>> = new Promise((resolve, reject) =>
   const localGit = simpleGit();
 
   localGit.branchLocal((err, data) => {
+    /* istanbul ignore if */
     if(err)
       return reject(err);
 
@@ -62,7 +63,7 @@ const getLocalBranchs: Promise<Array<string>> = new Promise((resolve, reject) =>
   });
 });
 
-const findProjectName = (
+export const findProjectName = (
   nowPath: string
 ): string => {
   const gitFolder: string = path.resolve(nowPath, '.git');
@@ -78,7 +79,7 @@ const projectName: string = findProjectName(process.cwd());
 
 export default async (
   argv: Array<string>
-): Promise<void> => {
+): Promise<branchsType> => {
   const config: {
     alias: {
       token: ?string
@@ -97,14 +98,16 @@ export default async (
     argv
   });
 
+  /* istanbul ignore if */
   if(!token) {
-    return console.log(chalk.red(`
+    console.log(chalk.red(`
   Need to give the personal access tokens.
   Generate new token: https://github.com/settings/tokens.
 
   After generating token, run the command with '--token' or '-t', ex: --token <token>.
   This is recommended to use 'git config --global alias.token "<token>"' to set token in .gitconfig
     `));
+    return {};
   }
 
   const totalCount: number = (await fetchGithub(
@@ -166,7 +169,7 @@ export default async (
         {
           remote: true,
           states: 'not merged'
-        } : {
+        } : /* istanbul ignore next */ {
           url: nodes[0].url,
           remote: true,
           states: 'merged'
@@ -177,12 +180,14 @@ export default async (
   }, {});
 
   (await getLocalBranchs).forEach(branchName => {
+    /* istanbul ignore if */
     if(!branchs[branchName])
       branchs[branchName] = {};
 
     branchs[branchName].local = true;
   });
 
+  /* istanbul ignore next */
   Object.keys(branchs).forEach(branchName => {
     const {
       url,
@@ -219,4 +224,6 @@ export default async (
     if(states === 'merged')
       console.log();
   });
+
+  return branchs;
 };
