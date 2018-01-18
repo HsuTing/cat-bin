@@ -25,7 +25,7 @@ const root: string = process.cwd();
 
 export default async (
   argv: Array<string>
-): ?Promise<void> => {
+): Promise<void> => {
   /* istanbul ignore if */
   if(!fs.existsSync(path.resolve(root, 'package.json')))
     return;

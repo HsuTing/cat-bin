@@ -40,7 +40,9 @@
     "chalk": "^2.1.0",
     "columnify": "^1.5.4",
     "command-line-args": "^4.0.7",
+    "fetch-everywhere": "^1.0.5",
     "form-data": "^2.3.1",
+    "git-config": "^0.0.7",
     "ignore": "^3.3.4",
     "ip": "^1.1.5",
     "koa": "^2.4.1",
@@ -49,7 +51,8 @@
     "mem-fs-editor": "^3.0.2",
     "node-watch": "^0.5.5",
     "npm-check": "^5.4.5",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "simple-git": "^1.85.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

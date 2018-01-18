@@ -1,9 +1,9 @@
 'use strict';
 
-import showIP from './../showIP';
+import showIp from './../showIp';
 
 test('show IP', () => {
   expect(
-    showIP()
+    showIp()
   ).toBeUndefined();
 });
