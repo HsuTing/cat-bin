@@ -7,7 +7,7 @@ import FormData from 'form-data';
 
 type fileType = Array<string>;
 
-const upload: Function = (
+const upload = (
   host: string,
   port: number,
   filesData: fileType

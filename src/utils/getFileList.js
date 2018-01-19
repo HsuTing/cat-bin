@@ -5,7 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import ignore from 'ignore';
 
-export const getFileList: Function = (
+export const getFileList = (
   root: string
 ): Array<string> => fs.readdirSync(root).reduce((
   result: Array<string>,
@@ -43,7 +43,8 @@ export const defaultIgnore: Array<string> = [
   '!LICENSE',
   '!LICENCE'
 ];
-export const getIngoreRules: Function = (
+
+export const getIngoreRules = (
   ignoreFilePath: string,
   addIgnore: Array<string> = []
 ): Array<string> => {
@@ -63,9 +64,9 @@ export const getIngoreRules: Function = (
   ].map(rule => `**/${rule}`);
 };
 
-export const getFileListWithFilter: Function = (
+export const getFileListWithFilter = (
   ignoreFileName: string,
-  addIgnore: Array<string>
+  addIgnore?: Array<string>
 ) => ignore().add(
   getIngoreRules(ignoreFileName, addIgnore)
 ).filter(
