@@ -4,10 +4,11 @@
 import 'fetch-everywhere';
 import fs from 'fs';
 import path from 'path';
-import commandLineArgs from 'command-line-args';
 import chalk from 'chalk';
 import gitConfig from 'git-config';
 import simpleGit from 'simple-git';
+
+import getOptions from 'utils/getOptions';
 
 type branchType = {
   url?: ?string,
@@ -86,21 +87,21 @@ export default async (
     }
   } = gitConfig.sync();
   const {
-    token
+    token,
+    print
   }: {
-    token: ?string
-  } = commandLineArgs([{
+    token: string,
+    print: Function
+  } = getOptions([{
     name: 'token',
     alias: 't',
     type: String,
     defaultValue: config.alias.token
-  }], {
-    argv
-  });
+  }], argv);
 
   /* istanbul ignore if */
   if(!token) {
-    console.log(chalk.red(`
+    print(chalk.red(`
   Need to give the personal access tokens.
   Generate new token: https://github.com/settings/tokens.
 
@@ -208,21 +209,21 @@ export default async (
     if(remote)
       output += chalk.gray(' (remote)');
 
-    console.log(output);
+    print(output);
 
     if(states === 'merged')
-      console.log();
+      print();
 
     if(local && states === 'merged')
-      console.log(`  delete local branch: ${chalk.cyan(`git branch -d ${branchName}`)}`);
+      print(`  delete local branch: ${chalk.cyan(`git branch -d ${branchName}`)}`);
 
     if(remote && states === 'merged') {
-      console.log(`  delete remote branch: ${chalk.cyan(`git push origin --delete ${branchName}`)}`);
-      console.log(`  use delete branch button: ${chalk.underline.blue(url)}`);
+      print(`  delete remote branch: ${chalk.cyan(`git push origin --delete ${branchName}`)}`);
+      print(`  use delete branch button: ${chalk.underline.blue(url)}`);
     }
 
     if(states === 'merged')
-      console.log();
+      print();
   });
 
   return branchs;

@@ -3,7 +3,6 @@
 
 import nodeFs from 'fs';
 import path from 'path';
-import commandLineArgs from 'command-line-args';
 import chalk from 'chalk';
 import Koa from 'koa';
 import body from 'koa-body';
@@ -11,6 +10,8 @@ import memFs from 'mem-fs';
 import editor from 'mem-fs-editor';
 import rimraf from 'rimraf';
 import ip from 'ip';
+
+import getOptions from 'utils/getOptions';
 
 type fileType = {
   name: string,
@@ -28,11 +29,13 @@ export default (
 ) => {
   const {
     port,
-    folder
+    folder,
+    print
   }: {
     port: number,
-    folder: string
-  } = commandLineArgs([{
+    folder: string,
+    print: Function
+  } = getOptions([{
     name: 'port',
     alias: 'p',
     type: Number,
@@ -42,9 +45,7 @@ export default (
     alias: 'f',
     type: String,
     defaultValue: './project'
-  }], {
-    argv
-  });
+  }], argv);
 
   const root: string = path.resolve(process.cwd(), folder);
 
@@ -115,9 +116,9 @@ export default (
       ): void => {
         /* istanbul ignore if */
         if(err)
-          return console.log(err);
+          return print(err);
 
-        console.log(`upload ${filePath.replace(root, '.')}`);
+        print(`upload ${filePath.replace(root, '.')}`);
       });
     });
 
@@ -125,6 +126,6 @@ export default (
   });
 
   return app.listen(port, () => {
-    console.log(chalk.green(`[cat-bin server] open server at ${ip.address()}:${port}`));
+    print(chalk.green(`[cat-bin server] open server at ${ip.address()}:${port}`));
   });
 };

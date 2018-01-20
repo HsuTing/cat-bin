@@ -4,6 +4,7 @@
 import path from 'path';
 import chalk from 'chalk';
 
+import getOptions from 'utils/getOptions';
 import {getFileListWithFilter} from 'utils/getFileList';
 
 const root: string = process.cwd();
@@ -31,14 +32,22 @@ const files: filesType = getFileListWithFilter('.npmignore')
     return result;
   }, {});
 
-export default (): void => {
+export default (
+  argv: Array<string>
+): void => {
+  const {
+    print
+  }: {
+    print: Function
+  } = getOptions([], argv);
+
   Object.keys(files)
     .forEach((
       key: string
     ): void => {
       if(files[key].length === 1)
-        console.log(files[key][0].replace(root, '.'));
+        print(files[key][0].replace(root, '.'));
       else
-        console.log(`${key.replace(root, '.')} ${chalk.green(`(${files[key].length})`)}`);
+        print(`${key.replace(root, '.')} ${chalk.green(`(${files[key].length})`)}`);
     });
 };

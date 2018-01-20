@@ -3,10 +3,11 @@
 
 import fs from 'fs';
 import path from 'path';
-import commandLineArgs from 'command-line-args';
 import npmCheck from 'npm-check';
 import chalk from 'chalk';
 import columnify from 'columnify';
+
+import getOptions from 'utils/getOptions';
 
 type rowType = {
   col_1: Array<string>,
@@ -31,18 +32,18 @@ export default async (
     return;
 
   const {
-    ignore
+    ignore,
+    print
   }: {
-    ignore: Array<string>
-  } = commandLineArgs([{
+    ignore: Array<string>,
+    print: Function
+  } = getOptions([{
     name: 'ignore',
     alias: 'i',
     type: String,
     multiple: true,
     defaultValue: []
-  }], {
-    argv
-  });
+  }], argv);
 
   const currentState: {
     get: Function
@@ -119,8 +120,8 @@ export default async (
     if(output[status].length === 0)
       return;
 
-    console.log();
-    console.log({
+    print();
+    print({
       new: chalk.bold.underline.green('New var.'),
       notInPkg: chalk.bold.underline.red('Not in the package.json.'),
       update: chalk.bold.underline.green('Update.'),
@@ -128,7 +129,7 @@ export default async (
       unused: chalk.bold.underline.white('Not used.')
     }[status]);
 
-    console.log(columnify(
+    print(columnify(
       output[status], {
         showHeaders: false,
         columnSplitter: '  ',

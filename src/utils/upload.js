@@ -10,6 +10,7 @@ type fileType = Array<string>;
 const upload = (
   host: string,
   port: number,
+  print: Function,
   filesData: fileType
 ): Promise<{}> => new Promise((resolve, reject) => {
   const files: fileType = filesData.filter(file => fs.lstatSync(file).isFile());
@@ -24,7 +25,7 @@ const upload = (
   form.append('filePaths', JSON.stringify([
     path.dirname(file).replace(process.cwd(), '.')
   ]));
-  console.log(`upload ${file.replace(process.cwd(), '.')}`);
+  print(`upload ${file.replace(process.cwd(), '.')}`);
 
   form.submit({
     host,
@@ -41,7 +42,7 @@ const upload = (
       return reject(err);
 
     res.resume();
-    upload(host, port, files.splice(1))
+    upload(host, port, print, files.splice(1))
       .then(() => resolve(res))
       .catch(/* istanbul ignore next */ err => reject(err));
   });

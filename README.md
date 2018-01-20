@@ -19,6 +19,7 @@ Install packages using [yarn](https://yarnpkg.com/) (we assume you have pre-inst
 - check-package
 
   Check npm package with `npm-check`.
+  - `silent`, `-s`: Print the information or not.
   - `ignore`, `-i`: Use to ignore dependencies that match specified glob.
   - Example:
 
@@ -31,6 +32,7 @@ Install packages using [yarn](https://yarnpkg.com/) (we assume you have pre-inst
   Check if branch is merged.
   Owing to `rebase`, `git branch --merged` is not always work.
   As a result, use this command to check merged branch.
+  - `silent`, `-s`: Print the information or not.
   - `token`, `-t`: Add personal access token.
   - Example:
 
@@ -41,6 +43,7 @@ Install packages using [yarn](https://yarnpkg.com/) (we assume you have pre-inst
 - npmignore
 
   Show the structure of the folders with `.npmignore`.
+  - `silent`, `-s`: Print the information or not.
   - Example:
 
     ```sh
@@ -50,6 +53,7 @@ Install packages using [yarn](https://yarnpkg.com/) (we assume you have pre-inst
 - server
 
   Open a server to get the files from `cat-bin client`.
+  - `silent`, `-s`: Print the information or not.
   - `port`, `-p`: Use to set the port for the `server`.
   - Example:
 
@@ -60,6 +64,7 @@ Install packages using [yarn](https://yarnpkg.com/) (we assume you have pre-inst
 - client
 
   Watch the files and post the files from `cat-bin server`.
+  - `silent`, `-s`: Print the information or not.
   - `host`, `-h`: Use to set the host of the `server`.
   - `port`, `-p`: Use to set the port of the `server`.
   - `ignore`, `-i`: Use to ignore files that match specified glob.
@@ -72,6 +77,7 @@ Install packages using [yarn](https://yarnpkg.com/) (we assume you have pre-inst
 - upload
 
   Send a file or a folder to `cat-bin server`.
+  - `silent`, `-s`: Print the information or not.
   - `file`,`-f`: Use to choose file.
   - `host`, `-h`: Use to set the host of the `server`.
   - `port`, `-p`: Use to set the port of the `server`.
@@ -84,6 +90,7 @@ Install packages using [yarn](https://yarnpkg.com/) (we assume you have pre-inst
 - showIP
 
   Show local ip.
+  - `silent`, `-s`: Print the information or not.
   - Example:
 
     ```sh

@@ -11,7 +11,7 @@ describe('utils/upload', () => {
     const {server, port} = await buildServer();
 
     expect(
-      await upload('localhost', port, [
+      await upload('localhost', port, console.log, [
         testFilePath
       ])
     ).toMatchObject({
@@ -19,7 +19,7 @@ describe('utils/upload', () => {
     });
 
     expect(
-      await upload('localhost', port, [
+      await upload('localhost', port, console.log, [
         testFilePath,
         testFilePath
       ])
@@ -32,7 +32,7 @@ describe('utils/upload', () => {
 
   it('# fail', () => {
     expect(
-      upload('localhost', 8000, [
+      upload('localhost', 8000, console.log, [
         testFilePath
       ])
     ).rejects.toThrowError('connect ECONNREFUSED 127.0.0.1:8000');
