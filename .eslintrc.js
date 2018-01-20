@@ -37,8 +37,8 @@ module.exports = {
     'import/resolver': {
       'babel-module': alias
     },
-    'flowtype': {
-      'onlyFilesWithFlowAnnotation': true
+    flowtype: {
+      onlyFilesWithFlowAnnotation: true
     }
   }
 };
