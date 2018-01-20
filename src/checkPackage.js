@@ -14,6 +14,7 @@ type rowType = {
   col_2: Array<string>,
   col_3: Array<string>
 };
+
 type dataType = {
   new: Array<rowType>,
   update: Array<rowType>,
@@ -26,7 +27,7 @@ const root: string = process.cwd();
 
 export default async (
   argv: Array<string>
-): Promise<void> => {
+): Promise<?dataType> => {
   /* istanbul ignore if */
   if(!fs.existsSync(path.resolve(root, 'package.json')))
     return;
@@ -142,4 +143,6 @@ export default async (
       }
     ));
   });
+
+  return output;
 };

@@ -34,7 +34,7 @@ const files: filesType = getFileListWithFilter('.npmignore')
 
 export default (
   argv: Array<string>
-): void => {
+): filesType => {
   const {
     print
   }: {
@@ -50,4 +50,6 @@ export default (
       else
         print(`${key.replace(root, '.')} ${chalk.green(`(${files[key].length})`)}`);
     });
+
+  return files;
 };

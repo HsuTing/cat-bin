@@ -40,7 +40,7 @@ Install packages using [yarn](https://yarnpkg.com/) (we assume you have pre-inst
     cat-bin check-branch -t <token>
     ```
 
-- npmignore
+- check-npm
 
   Show the structure of the folders with `.npmignore`.
   - `silent`, `-s`: Print the information or not.
