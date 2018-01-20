@@ -9,3 +9,10 @@ script:
   - yarn prod
   - yarn jest
 yarn: true
+deploy:
+  provider: npm
+  email: "hsuting0106@gmail.com"
+  api_key: $npm_token
+  skip_cleanup: true
+  on:
+    tags: true

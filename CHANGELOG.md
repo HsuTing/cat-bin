@@ -1,3 +1,14 @@
+<a name="0.2.1"></a>
+## [0.2.1](https://github.com/HsuTing/cat-bin/compare/v0.2.0...v0.2.1) (2018-01-20)
+
+
+### Features
+
+* **checkNpm:** rename npmignore to checkNpm ([29ca34c](https://github.com/HsuTing/cat-bin/commit/29ca34c))
+* **src:** add slient to the default options of commandLineArgs ([417a11b](https://github.com/HsuTing/cat-bin/commit/417a11b))
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/HsuTing/cat-bin/compare/v0.1.0...v0.2.0) (2018-01-18)
 
