@@ -11,7 +11,7 @@ type optionsType = {
 const print = (
   silent: boolean
 ) => (
-  message: string
+  message: string = ''
 ) => {
   if(!silent)
     return console.log(message);
