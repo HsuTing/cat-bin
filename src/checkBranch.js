@@ -101,13 +101,13 @@ export default async (
 
   /* istanbul ignore if */
   if(!token) {
-    print(chalk.red(`
+    print(chalk`
   Need to give the personal access tokens.
-  Generate new token: https://github.com/settings/tokens.
+  Generate new token: {blue.underline https://github.com/settings/tokens}.
 
-  After generating token, run the command with '--token' or '-t', ex: --token <token>.
-  This is recommended to use 'git config --global alias.token "<token>"' to set token in .gitconfig
-    `));
+  After generating token, run the command with {green --token} or {green -t}. ex: --token <token>.
+  This is recommended to use {green git config --global alias.token "<token>"} to set token in .gitconfig
+    `);
     return {};
   }
 
@@ -199,31 +199,31 @@ export default async (
     let output: string = '';
 
     if(states === 'merged')
-      output += chalk.bgRed.whiteBright.bold(` ✘ ${branchName} `);
+      output += chalk`{bgRed.whiteBright.bold  ✘ ${branchName} }`;
     else
-      output += chalk.bgGreen.whiteBright.bold(`  ${branchName} `);
+      output += chalk`{bgGreen.whiteBright.bold   ${branchName} }`;
 
     if(local)
-      output += chalk.gray(' (local)');
+      output += chalk`{gray  (local)}`;
 
     if(remote)
-      output += chalk.gray(' (remote)');
+      output += chalk`{gray  (remote)}`;
 
     print(output);
 
-    if(states === 'merged')
+    if(states === 'merged') {
       print();
 
-    if(local && states === 'merged')
-      print(`  delete local branch: ${chalk.cyan(`git branch -d ${branchName}`)}`);
+      if(local)
+        print(chalk`  delete local branch: {cyan git branch -d ${branchName}}`);
 
-    if(remote && states === 'merged') {
-      print(`  delete remote branch: ${chalk.cyan(`git push origin --delete ${branchName}`)}`);
-      print(`  use delete branch button: ${chalk.underline.blue(url)}`);
+      if(remote) {
+        print(chalk`  delete remote branch: {cyan git push origin --delete ${branchName}}`);
+        print(chalk`  use delete branch button: {blue.underline ${url}}`);
+      }
+
+      print();
     }
-
-    if(states === 'merged')
-      print();
   });
 
   return branchs;

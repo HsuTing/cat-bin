@@ -126,6 +126,6 @@ export default (
   });
 
   return app.listen(port, () => {
-    print(chalk.green(`[cat-bin server] open server at ${ip.address()}:${port}`));
+    print(chalk`{bgGreen  [cat-bin server] } open server at ${ip.address()}:${port}`);
   });
 };

@@ -71,8 +71,8 @@ export default async (
     ): dataType => {
       const bumpInstalled: string = pkg.bump ? pkg.installed : '';
       const installed: string = pkg.mismatch ? pkg.packageJson : bumpInstalled;
-      const name: string = chalk.yellow(pkg.moduleName);
-      const homepage: string = pkg.homepage ? chalk.blue.underline(pkg.homepage) : '';
+      const name: string = chalk`{yellow ${pkg.moduleName}}`;
+      const homepage: string = pkg.homepage ? chalk`{blue.underline ${pkg.homepage}}` : '';
       let status: string = 'normal';
 
       if(pkg.notInstalled)
@@ -92,13 +92,13 @@ export default async (
       result[status].push({
         col_1: [
           name,
-          pkg.devDependency ? chalk.green('devDep') : '' // type
+          pkg.devDependency ? chalk`{green devDep}` : '' // type
         ].filter(message => message !== '').join(' '),
 
         col_2: [
           installed,
           installed && '❯',
-          chalk.bold(pkg.latest || '')
+          chalk`{bold ${pkg.latest || ''}}`
         ].filter(message => message !== '').join(' '),
 
         col_3: [
@@ -123,11 +123,11 @@ export default async (
 
     print();
     print({
-      new: chalk.bold.underline.green('New var.'),
-      notInPkg: chalk.bold.underline.red('Not in the package.json.'),
-      update: chalk.bold.underline.green('Update.'),
-      missing: chalk.bold.underline.red('Missing.'),
-      unused: chalk.bold.underline.white('Not used.')
+      new: chalk`{green.bold.underline New var.}`,
+      notInPkg: chalk`{red.bold.underline Not in the package.json.}`,
+      update: chalk`{green.bold.underline Update.}`,
+      missing: chalk`{red.bold.underline Missing.}`,
+      unused: chalk`{white.bold.underline Not used.}`
     }[status]);
 
     print(columnify(

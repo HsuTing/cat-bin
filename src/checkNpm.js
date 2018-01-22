@@ -48,7 +48,7 @@ export default (
       if(files[key].length === 1)
         print(files[key][0].replace(root, '.'));
       else
-        print(`${key.replace(root, '.')} ${chalk.green(`(${files[key].length})`)}`);
+        print(chalk`${key.replace(root, '.')} {green (${files[key].length})}`);
     });
 
   return files;
