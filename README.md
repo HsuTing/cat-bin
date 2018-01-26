@@ -55,6 +55,7 @@ Install packages using [yarn](https://yarnpkg.com/) (we assume you have pre-inst
   Open a server to get the files from `cat-bin client`.
   - `silent`, `-s`: Print the information or not.
   - `port`, `-p`: Use to set the port for the `server`.
+  - `folder`, `-f`: Rename `project` to `folder`.
   - Example:
 
     ```sh
