@@ -1,6 +1,7 @@
 'use strict';
 
-import client from './../client';
+import client from 'client';
+
 import buildServer, {
   testIgnore
 } from './utils/upload-server';

@@ -5,7 +5,8 @@ import path from 'path';
 import getPort from 'get-port';
 import FormData from 'form-data';
 
-import app from './../server';
+import app from 'server';
+
 import {testFilePath} from './utils/test-files';
 
 const upload = (max, port) => new Promise((resolve, reject) => {

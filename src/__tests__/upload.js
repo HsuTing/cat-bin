@@ -1,6 +1,7 @@
 'use strict';
 
-import upload from './../upload';
+import upload from 'upload';
+
 import buildServer, {
   testFilePath,
   testFolderPath

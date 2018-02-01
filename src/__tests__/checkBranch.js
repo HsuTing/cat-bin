@@ -4,7 +4,7 @@ import gitConfig from 'git-config';
 
 import checkBranch, {
   findProjectName
-} from './../checkBranch';
+} from 'checkBranch';
 
 test('check branch', async () => {
   expect(await checkBranch([
