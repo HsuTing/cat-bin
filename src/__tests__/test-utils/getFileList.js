@@ -4,8 +4,9 @@ import fs from 'fs';
 import path from 'path';
 
 import {
+  defaultNpmIgnore,
+  defaultGitIgnore,
   getFileList,
-  defaultIgnore,
   getIngoreRules,
   getFileListWithFilter
 } from 'utils/getFileList';
@@ -31,21 +32,33 @@ test('get file list', () => {
 });
 
 describe('get ignore rules', () => {
-  it('# have .npmignore', () => {
+  it('# use .npmignore', () => {
     expect(
-      getIngoreRules('./.npmignore')
+      getIngoreRules('.npmignore')
         .sort()
     ).toMatchObject(
       [
-        ...defaultIgnore,
-        ...getIgnore('./.npmignore')
+        ...defaultNpmIgnore,
+        ...getIgnore('.npmignore')
       ].sort().map(rule => `**/${rule}`)
     );
   });
 
-  it('# do not have .npmignore', () => {
+  it('# use .gitignore', () => {
     expect(
-      getIngoreRules('./test.js')
+      getIngoreRules('.gitignore')
+        .sort()
+    ).toMatchObject(
+      [
+        ...defaultGitIgnore,
+        ...getIgnore('.gitignore')
+      ].sort().map(rule => `**/${rule}`)
+    );
+  });
+
+  it('# do not use .gitignore or .npmignore', () => {
+    expect(
+      getIngoreRules('.ignore')
     ).toMatchObject([]);
   });
 });

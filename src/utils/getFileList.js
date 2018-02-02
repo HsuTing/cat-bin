@@ -21,7 +21,11 @@ export const getFileList = (
   return result;
 }, []);
 
-export const defaultIgnore: Array<string> = [
+export const defaultGitIgnore: Array<string> = [
+  '.git'
+];
+
+export const defaultNpmIgnore: Array<string> = [
   '.*.swp',
   '._*',
   '.DS_Store',
@@ -60,7 +64,12 @@ export const getIngoreRules = (
   return [
     ...ignoreRules,
     ...addIgnore,
-    ...(path.basename(ignoreFilePath) === '.npmignore' ? defaultIgnore : [])
+    ...({
+      gitignore: defaultGitIgnore,
+      npmignore: defaultNpmIgnore
+    }[
+      path.basename(ignoreFilePath).replace(/\./, '')
+    ] || [])
   ].map(rule => `**/${rule}`);
 };
 
