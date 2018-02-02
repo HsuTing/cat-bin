@@ -60,7 +60,7 @@ export const getIngoreRules = (
   return [
     ...ignoreRules,
     ...addIgnore,
-    ...defaultIgnore
+    ...(path.basename(ignoreFilePath) === '.npmignore' ? defaultIgnore : [])
   ].map(rule => `**/${rule}`);
 };
 

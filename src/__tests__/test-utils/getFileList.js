@@ -46,9 +46,7 @@ describe('get ignore rules', () => {
   it('# do not have .npmignore', () => {
     expect(
       getIngoreRules('./test.js')
-    ).toMatchObject(
-      defaultIgnore.map(rule => `**/${rule}`)
-    );
+    ).toMatchObject([]);
   });
 });
 

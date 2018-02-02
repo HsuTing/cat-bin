@@ -4,6 +4,7 @@
     "test:watch": "yarn test --watchAll",
     "lint": "eslint --cache ./src --ext .js",
     "lint:watch": "esw --cache ./src --ext .js -w --color",
+    "flow": "flow",
     "babel": "rm -rf ./lib && babel src --out-dir lib --ignore __tests__",
     "babel:watch": "rm -rf ./lib && babel -w src --out-dir lib --ignore __tests__",
     "prepublishOnly": "yarn babel",
@@ -24,6 +25,7 @@
     "cat-bin"
   ],
   "pre-commit": [
+    "flow",
     "lint"
   ],
   "homepage": "https://github.com/HsuTing/cat-bin/",
