@@ -13,7 +13,7 @@
     "watch": "concurrently -c green \"yarn lint:watch\" \"yarn babel:watch\""
   },
   "name": "cat-bin",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Tool for cat",
   "author": {
     "name": "HsuTing",
