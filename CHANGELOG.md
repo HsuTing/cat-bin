@@ -1,3 +1,17 @@
+# Change Log
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+<a name="0.2.4"></a>
+## [0.2.4](https://github.com/HsuTing/cat-bin/compare/v0.2.3...v0.2.4) (2018-02-02)
+
+
+### Bug Fixes
+
+* **utils/getFileList:** just .npmignore use defaultIgnore ([a826be1](https://github.com/HsuTing/cat-bin/commit/a826be1))
+
+
+
 <a name="0.2.3"></a>
 ## [0.2.3](https://github.com/HsuTing/cat-bin/compare/v0.2.2...v0.2.3) (2018-01-22)
 
@@ -43,6 +57,3 @@
 * **root:** rewrite ([4a4426d](https://github.com/HsuTing/cat-bin/commit/4a4426d))
 * **src:** add flowType ([a2bcc91](https://github.com/HsuTing/cat-bin/commit/a2bcc91)), closes [#2](https://github.com/HsuTing/cat-bin/issues/2)
 * **src:** add test ([cf579ca](https://github.com/HsuTing/cat-bin/commit/cf579ca))
-
-
-
